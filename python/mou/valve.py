@@ -1,5 +1,5 @@
 import struct
-import moudp
+import udp
 
 class server:
 	INFO = '\xff\xff\xff\xffTSource Engine Query\x00'
@@ -7,7 +7,7 @@ class server:
 	#CHALLENGE = '\xff\xff\xff\xff\x55\xff\xff\xff\xff'
 	
 	def __init__(self, ip, port="27015"):
-		self.udp = moudp.udp(port)
+		self.udp = udp.udp(port)
 		self.ip = ip
 	
 	def info(self):
