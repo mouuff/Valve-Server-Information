@@ -1,0 +1,8 @@
+This is a very simple api for valve servers
+for now you can "only" get all server informations
+like players, maxplayer, map, mod, and stuff like that
+
+I might add in the future ping, and get all players names and score
+
+example script:
+(http://i.imgur.com/IRlzcZH.png)
