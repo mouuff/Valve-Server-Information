@@ -9,10 +9,56 @@ public class valve {
 		Udp = new udp(server, port);
 	}
 	
-	public byte[] info() throws Exception{
+	public String[] info() throws Exception{
 		Udp.sendByte(INFO);
-		byte[] rep = Udp.recv();
-		return rep;
+		byte[] raw = Udp.recv();
+		
+		String name, map, folder, game;
+		
+		
+		//byte[] data = java.util.Arrays.copyOfRange(raw, 2, raw.length);
+		
+		int end;
+		byte[] raw1 = Arrays.copyOfRange(raw, 6, raw.length);
+		
+		end = valve.find(raw1,(byte)0x00);
+		name = new String(Arrays.copyOfRange(raw1,0,end),"UTF-8");
+		
+		end = valve.find(raw1,(byte)0x00);
+		byte[] raw2 = Arrays.copyOfRange(raw1, end+1, raw1.length);
+		map = new String(Arrays.copyOfRange(raw2,0,valve.find(raw2,(byte)0x00)),"UTF-8");
+		
+		end = valve.find(raw2,(byte)0x00);
+		byte[] raw3 = Arrays.copyOfRange(raw2, end+1, raw2.length);
+		folder = new String(Arrays.copyOfRange(raw3,0,valve.find(raw3,(byte)0x00)),"UTF-8");
+		
+		end = valve.find(raw3,(byte)0x00);
+		byte[] raw4 = Arrays.copyOfRange(raw3, end+1, raw3.length);
+		game = new String(Arrays.copyOfRange(raw4,0,valve.find(raw4,(byte)0x00)),"UTF-8");
+		
+		byte[] raw5 = Arrays.copyOfRange(raw4, end, raw4.length);
+		byte[] pack = Arrays.copyOfRange(raw5, 0, 7);
+		
+		Byte p = pack[0];
+		String players = Integer.toString(p.intValue());
+		
+		Byte mp = pack[1];
+		String maxplayers = Integer.toString(mp.intValue());
+		
+		Byte b = pack[1];
+		String bots = Integer.toString(b.intValue());
+		
+		String[] result = {name,map,game,players,maxplayers};
+		
+		return result;
+	}
+	public static int find(byte[] bytes, byte b){
+		for (int x = 0; x < bytes.length; x++){
+			if (bytes[x] == b){
+				return x;
+			}
+		}
+		return bytes.length;
 	}
 	
     public static byte[] hexStringToByteArray(String s) {
