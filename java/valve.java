@@ -61,7 +61,7 @@ public class valve {
 		}
 		return bytes.length;
 	}
-	public void close(){
+	public void close() throws Exception{
 		Udp.close();
 	}
 	

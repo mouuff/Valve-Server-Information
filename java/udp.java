@@ -30,7 +30,7 @@ public class udp
 		
 		socket.send(packet);
 	}
-	public void close(){
+	public void close() throws Exception{
 		socket.close();
 	}
 }
