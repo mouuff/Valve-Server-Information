@@ -13,7 +13,7 @@ class udp:
 		self.port = int(port)
 		self.udp = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 		self.udp.settimeout(3)
-		self.buffer = 1024
+		self.buffer = 2048
 		self.raw = ''
 
 	def send(self, ip, raw_data):

@@ -40,9 +40,6 @@ class server:
 			raw = raw[end+1:]
 			
 			content.append(player)
-			
-				
-				
 		
 		return content
 	

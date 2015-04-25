@@ -11,11 +11,13 @@ public class udp
 		port = server_port;
 		IPAddress = InetAddress.getByName(server);
 		socket = new DatagramSocket(new InetSocketAddress(port));
+		socket.setSoTimeout(3000);
 	}
 	public byte[] recv() throws Exception{
-		byte[] receiveData = new byte[1024];
+		byte[] receiveData = new byte[2048];
 		
 		DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
+		
 		socket.receive(receivePacket);
 		
 		return receiveData;
@@ -27,5 +29,8 @@ public class udp
 		DatagramPacket packet = new DatagramPacket(message, msg_length, IPAddress, port);
 		
 		socket.send(packet);
+	}
+	public void close(){
+		socket.close();
 	}
 }

@@ -9,6 +9,7 @@ public class example {
 			for (int x = 0; x < infos.length; x++){
 				System.out.println(infos[x]);
 			}
+			server.close();
 		}
 		catch (Exception e){
 			e.printStackTrace();

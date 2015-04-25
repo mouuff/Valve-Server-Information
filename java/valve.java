@@ -13,6 +13,7 @@ public class valve {
 		Udp.sendByte(INFO);
 		byte[] raw = Udp.recv();
 		
+		
 		String name, map, folder, game;
 		
 		
@@ -45,10 +46,10 @@ public class valve {
 		Byte mp = pack[1];
 		String maxplayers = Integer.toString(mp.intValue());
 		
-		Byte b = pack[1];
+		Byte b = pack[2];
 		String bots = Integer.toString(b.intValue());
 		
-		String[] result = {name,map,game,players,maxplayers};
+		String[] result = {name, map, game, players, maxplayers, bots};
 		
 		return result;
 	}
@@ -59,6 +60,9 @@ public class valve {
 			}
 		}
 		return bytes.length;
+	}
+	public void close(){
+		Udp.close();
 	}
 	
     public static byte[] hexStringToByteArray(String s) {

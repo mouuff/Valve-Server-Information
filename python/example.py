@@ -18,4 +18,3 @@ players = Server.players()
 
 for player in players:
 	print player
-
