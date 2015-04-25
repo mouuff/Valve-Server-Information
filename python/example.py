@@ -14,7 +14,6 @@ infos = Server.info()
 for info in infos:
 	print info + " = " + str(infos[info])
 
-players = Server.players()
-
-for player in players:
-	print player
+#players = Server.players()
+#for player in players:
+#	print player
