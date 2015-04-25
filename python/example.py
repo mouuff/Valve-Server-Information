@@ -2,17 +2,20 @@
 import mou.valve as valve
 from sys import argv
 
-if (argv>2):
-	ip = argv[1]
-	port = argv[2]
+if (argv>1):
+	Server = valve.server(*argv[1:])
 else:
 	ip = raw_input("Valve server ip: ")
 	port = raw_input("Valve server port(27015): ")
+	Server = valve.server(ip,port)
 
-Server = valve.server(ip,port)
 infos = Server.info()
 
 for info in infos:
 	print info + " = " + str(infos[info])
 
-raw_input("...")
+players = Server.players()
+
+for player in players:
+	print player
+

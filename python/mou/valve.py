@@ -4,11 +4,47 @@ import udp
 class server:
 	INFO = '\xff\xff\xff\xffTSource Engine Query\x00'
 	
-	#CHALLENGE = '\xff\xff\xff\xff\x55\xff\xff\xff\xff'
+	CHALLENGE = '\xff\xff\xff\xff\x55\xff\xff\xff\xff'
 	
 	def __init__(self, ip, port="27015"):
 		self.udp = udp.udp(port)
 		self.ip = ip
+		
+	def players(self):
+		'''returns all players names kills time etc.'''
+		self.udp.send(self.ip, self.CHALLENGE)
+		challenge = self.udp.get_raw()
+		id = challenge[5:]
+		req = "\xff\xff\xff\xff\x55"+id
+		self.udp.send(self.ip, req)
+		raw = self.udp.get_raw()
+		raw = raw.replace('\xff\xff\xff\xff','')
+		
+		players = ord(raw[1])
+		
+		raw = raw[3:]
+		
+		content = list()
+		
+		for x in xrange(int(players)):
+			player = dict()
+			#name
+			end = raw.find('\x00')
+			player['name'] = raw[:end]
+			raw = raw[end+1:]
+			#bytes
+			end = 8
+			infos = struct.unpack('lf',raw[:end])
+			player['score'] = infos[0]
+			player['time'] = infos[1]
+			raw = raw[end+1:]
+			
+			content.append(player)
+			
+				
+				
+		
+		return content
 	
 	def info(self):
 		'''returns all server info under a dict'''
