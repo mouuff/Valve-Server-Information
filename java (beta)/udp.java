@@ -4,11 +4,13 @@ import java.net.*;
 public class udp
 {
 	DatagramSocket socket;
-	InetAddress local;
+	InetAddress IPAddress;
+	int port;
 	
-	public udp(String server, int port) throws Exception{
-		local = InetAddress.getByName(server);
-		socket = new DatagramSocket(port, local);
+	public udp(String server, int server_port) throws Exception{
+		port = server_port;
+		IPAddress = InetAddress.getByName(server);
+		socket = new DatagramSocket(new InetSocketAddress(port));
 	}
 	public byte[] recv() throws Exception{
 		byte[] receiveData = new byte[1024];
@@ -22,7 +24,7 @@ public class udp
 	public void sendByte(byte[] message) throws Exception{
 		int msg_length = message.length;
 		
-		DatagramPacket packet = new DatagramPacket(message, msg_length);
+		DatagramPacket packet = new DatagramPacket(message, msg_length, IPAddress, port);
 		
 		socket.send(packet);
 	}
