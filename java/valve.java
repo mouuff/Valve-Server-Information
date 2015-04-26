@@ -38,11 +38,12 @@ public class valve {
 		game = new String(Arrays.copyOfRange(raw4,0,valve.find(raw4,(byte)0x00)),"UTF-8");
 		
 		byte[] raw5 = Arrays.copyOfRange(raw4, end, raw4.length);
-		byte[] pack = Arrays.copyOfRange(raw5, 0, 7);
+		byte[] pack = Arrays.copyOfRange(raw5, 0, 8);
+		
+		System.out.println(Integer.toString(pack.length));
 		
 		Byte p, mp, b;
 		
-		/*
 		if (pack[7] == (byte)0x01){
 			p = pack[1];
 			mp = pack[2];
@@ -58,10 +59,6 @@ public class valve {
 			mp = pack[6];
 			b = pack[7];
 		}
-		* */
-		p = pack[0];
-		mp = pack[1];
-		b = pack[2];
 		
 		String players = Integer.toString(p.intValue());
 		String maxplayers = Integer.toString(mp.intValue());
