@@ -40,13 +40,31 @@ public class valve {
 		byte[] raw5 = Arrays.copyOfRange(raw4, end, raw4.length);
 		byte[] pack = Arrays.copyOfRange(raw5, 0, 7);
 		
-		Byte p = pack[0];
+		Byte p, mp, b;
+		
+		/*
+		if (pack[7] == (byte)0x01){
+			p = pack[1];
+			mp = pack[2];
+			b = pack[3];
+		}
+		else if (pack[7] == (byte)0x31){
+			p = pack[0];
+			mp = pack[1];
+			b = pack[2];
+		}
+		else{
+			p = pack[5];
+			mp = pack[6];
+			b = pack[7];
+		}
+		* */
+		p = pack[0];
+		mp = pack[1];
+		b = pack[2];
+		
 		String players = Integer.toString(p.intValue());
-		
-		Byte mp = pack[1];
 		String maxplayers = Integer.toString(mp.intValue());
-		
-		Byte b = pack[2];
 		String bots = Integer.toString(b.intValue());
 		
 		String[] result = {name, map, game, players, maxplayers, bots};
