@@ -4,6 +4,19 @@ import java.nio.*;
 
 public class valve {
 	byte[] INFO = valve.hexStringToByteArray("ffffffff54536f7572636520456e67696e6520517565727900");
+	
+	public int V_HEADER = 1;
+	public int V_PROTOCOL = 2;
+	public int V_NAME = 3;
+	public int V_MAP = 4;
+	public int V_FOLDER = 5;
+	public int V_GAME = 6;
+	public int V_ID = 7;
+	public int V_PLAYERS = 8;
+	public int V_MAX_PLAYERS = 9;
+	public int V_BOTS = 10;
+	
+	
 	udp Udp;
 	
 	public valve(String server, int port) throws Exception{
