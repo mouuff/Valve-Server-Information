@@ -10,13 +10,15 @@ public class valve {
 		Udp = new udp(server, port);
 	}
 	
-	public void info() throws Exception{
+	public String[] info() throws Exception{
 		Udp.sendByte(INFO);
 		byte[] raw = Udp.recv();
 		
 		char[] packet = "xxxxcbsssshbbb".toCharArray();
+		String[] result = new String[packet.length];
 		
 		int pos = 0;
+		int Strindex = 0;
 		
 		for (int x = 0; x < packet.length; x++){
 			
@@ -27,7 +29,8 @@ public class valve {
 			}
 			else if (type == 'c'){
 				char c = (char) (raw[pos] & 0xFF);
-				System.out.println(c);
+				result[Strindex] = Character.toString(c);
+				Strindex += 1;
 				pos += 1;
 			}
 			else if (type == 'h'){
@@ -36,8 +39,9 @@ public class valve {
 				bb.put(raw[pos]);
 				bb.put(raw[pos+1]);
 				short shortVal = bb.getShort(0);
-				System.out.println(shortVal);
+				result[Strindex] = Short.toString(shortVal);
 				pos += 2;
+				Strindex += 1;
 			}
 			else if (type == 's'){
 				String s = "";
@@ -47,17 +51,18 @@ public class valve {
 					s += Character.toString(c);
 					pos += 1;
 				}
-				System.out.println(s);
+				result[Strindex] = s;
+				Strindex += 1;
 				pos += 1;
 			}
 			else if (type == 'b'){
 				Byte p = raw[pos];
-				System.out.println(Integer.toString(p.intValue()));
+				result[Strindex] = Integer.toString(p.intValue());
+				Strindex += 1;
 				pos += 1;
 			}
-			
-			//System.out.println(packet[x]);
 		}
+		return result;
 	}
 	public static int find(byte[] bytes, byte b){
 		for (int x = 0; x < bytes.length; x++){
