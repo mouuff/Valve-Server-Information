@@ -22,7 +22,7 @@ public class struct{
 				pos += 1;
 			}
 			else if (type == 'l'){
-				bb = ByteBuffer.allocate(4);
+				ByteBuffer bb = ByteBuffer.allocate(4);
 				bb.put(raw[pos]);
 				bb.put(raw[pos+1]);
 				bb.put(raw[pos+2]);
@@ -33,7 +33,7 @@ public class struct{
 				Strindex += 1;
 			}
 			else if (type == 'f'){
-				bb = ByteBuffer.allocate(4);
+				ByteBuffer bb = ByteBuffer.allocate(4);
 				bb.put(raw[pos]);
 				bb.put(raw[pos+1]);
 				bb.put(raw[pos+2]);
